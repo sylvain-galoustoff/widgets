@@ -1,0 +1,553 @@
+@import "reset.scss";
+@import "vars.scss";
+@import "framework.scss";
+
+html,
+body,
+#root,
+#page {
+	height: 100%;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background-color: $bg;
+}
+
+#page {
+	display: flex;
+	padding: $marge*4;
+}
+
+/* MENU */
+
+#menu {
+	width: 300px;
+	padding: $marge;
+}
+
+#menu-header {
+	padding: $marge*2;
+	margin-bottom: $marge*2;
+	height: 80px;
+
+	.help {
+		color: $secondary;
+	}
+}
+
+#menu-body {
+	padding: 0 $marge*2;
+}
+
+.menu-item {
+
+	margin-bottom: $marge;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	padding: $marge*2;
+	border-radius: $corner;
+	cursor: pointer;
+	@include trans;
+
+	&:hover,
+	&.active {
+		background-color: $primary;
+		color: $card;
+	}
+
+	svg {
+		margin-right: $marge;
+	}
+
+}
+
+/* HEADER */
+#content {
+	flex: 1;
+	margin-left: $marge*4;
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	height: 80px;
+}
+
+#content-header {
+	margin-bottom: $marge*2;
+	display: flex;
+}
+
+#page-title {
+
+	overflow: hidden;
+	flex: 1;
+	display: flex;
+	flex-direction: row;
+
+	h1 {
+		height: 100%;
+		align-items: center;
+		padding: $marge*2;
+		color: $secondary;
+
+		&::first-letter {
+			text-transform: uppercase;
+		}
+	}
+}
+
+/* TOAST */
+
+.toast {
+	position: relative;
+	margin-left: auto;
+	padding: $marge $marge*2;
+	display: flex;
+	align-items: center;
+	transform: translateX(100%);
+	@include trans;
+
+	&.danger {
+		background-color: $danger;
+		transform: translateX(0);
+
+		#close-toast {
+			color: darken($danger, 10%);
+		}
+	}
+
+	p::first-letter {
+		text-transform: capitalize;
+	}
+}
+
+#close-toast {
+	position: absolute;
+	top: calc($marge/2);
+	right: calc($marge/2);
+	font-size: .9rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+/* DASHBOARD */
+#dashboard {
+	flex: 1;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(6, 1fr);
+	grid-gap: $marge*2;
+	position: relative;
+}
+
+.cell {
+	@include trans;
+	@include dev($card);
+	border-radius: $corner;
+	opacity: 0;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: rgba($card, .5);
+	user-select: none;
+
+	&.show {
+		opacity: 1;
+	}
+
+	&.highlight {
+		background-color: rgba($card, .25);
+		transform: scale(1.05);
+	}
+}
+
+/* WIDGETS */
+.widget {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	grid-column-end: span 1;
+	grid-row-end: span 1;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	user-select: none;
+
+	&.small {
+		grid-column-end: span 1;
+		grid-row-end: span 1;
+	}
+
+	&.regular {
+		grid-column-end: span 1;
+		grid-row-end: span 2;
+
+		.widget-header {
+			flex: initial;
+		}
+
+	}
+
+	&.config {
+
+		.widget-header,
+		.widget-body {
+			opacity: 0;
+		}
+
+		.widget-config {
+			transform: translateX(0);
+		}
+
+		.widget-config-text {
+			margin-bottom: $marge*2;
+		}
+
+	}
+}
+
+.widget-header {
+	display: flex;
+	align-items: center;
+	padding: $marge*2;
+	@include trans;
+}
+
+.widget-icon {
+	border: 2px solid $secondary;
+	border-radius: $corner;
+	height: 60px;
+	width: 60px;
+	flex-shrink: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+	color: $secondary;
+	@include trans;
+
+	&.active {
+		background-color: $secondary;
+		color: $card;
+	}
+}
+
+.widget-text {
+	padding: 0 0 0 $marge*2;
+	height: 60px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.widget-title {
+	@include h2;
+	margin-bottom: $marge;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	&::first-letter {
+		text-transform: uppercase;
+	}
+}
+
+.widget-subtitle {
+	font-weight: 200;
+	font-size: .95rem;
+	position: relative;
+}
+
+.widget-body {
+	padding: 0 $marge*2 $marge*2 $marge*2;
+}
+
+.widget-footer {
+	display: flex;
+	justify-content: flex-end;
+	position: absolute;
+	bottom: $marge;
+	right: $marge;
+	z-index: 20;
+
+	svg {
+		@include trans;
+		cursor: pointer;
+		margin-left: $marge;
+		opacity: .5;
+
+		&:hover {
+			color: $primary;
+			opacity: 1;
+		}
+	}
+
+	.widget-delete {
+		&:hover {
+			color: lighten($danger, 10%);
+		}
+	}
+}
+
+.widget-config {
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	@include card($card2);
+	padding: $marge*2;
+	transform: translateX(101%);
+	@include trans;
+}
+
+.config-close {
+	position: absolute;
+	top: $marge;
+	right: $marge;
+	cursor: pointer;
+	@include trans;
+
+	&:hover {
+		color: $primary;
+	}
+}
+
+.config-title {
+	font-weight: 700;
+}
+
+.widget-sizes {
+	margin-top: $marge;
+	display: flex;
+	width: 100%;
+
+	p {
+		@include help;
+		margin-right: $marge;
+		cursor: pointer;
+		@include trans;
+
+		&.active {
+			color: $secondary;
+		}
+
+		&:hover {
+			color: $primary;
+		}
+
+	}
+
+}
+
+/* WIDGETS SPECIFIQUES */
+.ampoule,
+.outlet {
+
+	&.regular {
+
+		.widget-body {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			svg {
+				font-size: 4rem;
+				color: darken($secondary, 70%);
+				cursor: pointer;
+				@include trans;
+			}
+
+			.power-status {
+				font-size: 2rem;
+			}
+
+			&.active {
+
+				svg {
+					color: $secondary;
+					filter: drop-shadow(0px 0px 5px $primary);
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
+.horloge {
+
+	&.regular {
+
+		.widget-body {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 3rem;
+			font-weight: 700;
+		}
+
+	}
+
+}
+
+.meteo {
+
+	.widget-icon {
+		font-size: 2rem;
+	}
+
+	.submit-city-button {
+		background-color: transparent;
+		border: none;
+		font-size: 1rem;
+		position: absolute;
+		top: 0px;
+		right: 0;
+		cursor: pointer;
+		color: $secondary;
+		opacity: 0;
+		@include trans;
+
+		&:hover {
+			color: $primary;
+		}
+
+		&.active {
+			opacity: 1;
+		}
+	}
+
+	&.regular {
+
+		.widget-body {
+			flex: 1;
+			display: flex;
+			align-items: center;
+		}
+
+		.meteo-icon {
+			flex: 1;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 5rem;
+			margin-right: $marge*2;
+		}
+
+		.meteo-text-wrapper {
+			margin-left: auto;
+			width: 100%;
+		}
+
+		.temperature {
+			font-size: 1.75rem;
+			font-weight: 700;
+			margin-bottom: $marge;
+			height: 1.75rem;
+			width: 100%;
+		}
+
+		.meteo-text {
+			@include help;
+			height: .9rem;
+			width: 100%;
+		}
+
+	}
+
+}
+
+.thermostat {
+
+	.widget-text {
+		flex: 1;
+	}
+
+	.widget-title {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		overflow: visible;
+	}
+
+	.temp-value {
+		margin-right: $marge*2;
+	}
+
+	.temp-control {
+		display: flex;
+		flex-direction: column;
+
+		span {
+			width: 25px;
+			height: 15px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			@include trans;
+
+			&:hover {
+				color: $secondary;
+				transform: scale(1.5);
+			}
+		}
+	}
+
+	&.regular {
+		.widget-body {
+			font-size: 3rem;
+			font-weight: 700;
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+
+			.temp-control-up,
+			.temp-control-down {
+				position: absolute;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+
+				svg {
+					transform: translateX(-50%);
+					@include trans;
+
+					&:hover {
+						color: $secondary;
+						transform: translateX(-50%) scale(1.15);
+					}
+				}
+			}
+
+			.temp-control-up {
+				top: -15px;
+				left: 50%;
+			}
+
+			.temp-control-down {
+				bottom: 0;
+				left: 50%;
+			}
+		}
+	}
+
+}

@@ -1,0 +1,25 @@
+$marge: 8px;
+$corner : 8px;
+
+$bg: #1B2129;
+$card: #323D4D;
+$card2: #465263;
+$light: #EFECE0;
+$primary: #E9A643;
+$secondary: #FCD79F;
+$danger: #874040;
+
+@mixin dev($color: red, $width: 1px) {
+    border: $width solid $color;
+}
+
+@mixin trans($time: .15s) {
+    transition: all $time ease-out;
+}
+
+@mixin card($bg: $card) {
+    border-radius: $corner;
+    background-color: $bg;
+    box-shadow: 2px 2px 8px rgba(black, .25);
+    color: $light;
+}

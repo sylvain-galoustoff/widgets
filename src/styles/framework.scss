@@ -1,0 +1,184 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 22px;
+}
+
+/* FONTS */
+h1,
+.h1 {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+@mixin h1 {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+h2,
+.h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+@mixin h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: $light;
+}
+
+.help {
+    font-size: .9rem;
+    font-weight: 300;
+}
+
+@mixin help {
+    font-size: .9rem;
+    font-weight: 300;
+}
+
+/* LOADER & PLACEHOLDER */
+.placeholder {
+    position: relative;
+    background-color: $card2;
+    overflow: hidden;
+    animation: placeholder .5s infinite linear alternate;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 10%;
+        background: linear-gradient(to left, $card2, $card, $card2);
+        animation: placeholdercursor 2s infinite linear;
+    }
+}
+
+@keyframes placeholdercursor {
+    from {
+        left: 0;
+    }
+
+    50% {
+        left: 100%;
+    }
+
+    to {
+        left: 100%;
+    }
+}
+
+@keyframes placeholder {
+    from {
+        opacity: .3;
+    }
+
+    to {
+        opacity: .7;
+    }
+}
+
+.sync-icon {
+    animation: sync 3s infinite linear;
+}
+
+@keyframes sync {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+/* FORMS */
+[type="text"] {
+    font-family: 'Roboto', sans-serif;
+    @include help;
+    color: $light;
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    text-transform: capitalize;
+
+    &:hover {
+        border-color: rgba($light, .5);
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $light;
+    }
+}
+
+/* CARDS */
+.card {
+    @include card;
+}
+
+/* SWITCH BUTTON */
+.switch-button-wrapper {
+
+    display: flex;
+    align-items: center;
+
+    &.active {
+
+        .switch-button-container {
+            background-color: $secondary;
+        }
+
+        .switch-button {
+            transform: scale(1.05) translateX(100%);
+        }
+    }
+
+}
+
+.switch-button-container {
+    background-color: rgba($bg, .5);
+    box-shadow: inset 1px 1px 1px rgba(black, .25);
+    width: 1.8rem;
+    border-radius: .9rem;
+    cursor: pointer;
+    @include trans;
+    margin-right: $marge;
+
+    &.active {
+        background-color: $secondary;
+
+        .switch-button {
+            transform: scale(1.05) translateX(100%);
+        }
+    }
+}
+
+.switch-button {
+    position: relative;
+    width: .9rem;
+    height: .9rem;
+    transform: scale(1.05);
+    background-color: $light;
+    box-shadow: 2px 2px 2px rgba(black, .25);
+    border-radius: 50%;
+    @include trans;
+}
+
+/* POWER BUTTON */
+.power-button-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
