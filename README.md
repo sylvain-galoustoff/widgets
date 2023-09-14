@@ -1,8 +1,10 @@
-# React + Vite
+# Widgets
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Smart home control est un tableau de bord pour piloter des appareils connectés domestiques. Dans le cadre de cette démo, c’est surtout un prétexte pour montrer un dashboard composé de widgets dont la disposition peut être déterminée par l’utilisateur en les déplaçant par drag and drop.  
 
-Currently, two official plugins are available:
+## Technos  
+Front-end : React
+Back-end : Firebase / firestore
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Démo  
+https://demo.sylvain-galoustoff.dev/widgets/
